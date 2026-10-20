@@ -1,7 +1,7 @@
 # Mapa del Dinero — cómo producir un video (instrucciones para la tarea diaria)
 
 Canal de Diego: **Mapa del Dinero** (TikTok registrado en Francia, contenido en español; también YouTube Shorts, Reels y Facebook).
-Serie: economía y geopolítica explicada — "¿Por qué [país] es rico/pobre?" y similares. Meta: seguidores, reproducciones, comentarios y llegar a la monetización de YouTube antes del 1 de febrero de 2027.
+Temas: economía y geopolítica explicada en 3 líneas — **países** ("¿Por qué [país] es rico/pobre?"), **empresas y apps** ("¿Cómo gana dinero ___?", casinos, juegos gratis…) y **actualidad** (guerras, disputas, aranceles y acuerdos vistos por el lado del dinero). Objetivo n.º 1: que se vuelva viral — gancho fuerte, que vean hasta el final y que entren al perfil a ver más. Meta: seguidores, reproducciones, comentarios y llegar a la monetización de YouTube antes del 1 de febrero de 2027.
 
 ## Reglas fijas (Diego las pidió)
 - Todo en español. Responder a Diego en español.
@@ -26,9 +26,11 @@ Debe terminar en `SETUP OK`. No hagas `git commit` ni `git push` del kit: solo s
 
 ## 1. Elegir el tema
 1. Busca en Google Drive el historial: `search_files` con `title contains 'MDD_hist_'`. Los títulos tienen la forma `MDD_hist_AAAA-MM-DD_AM|PM_<slug>`. Esos slugs ya se hicieron (además de suiza, singapur, noruega, colombia).
-2. Busca el documento `MDD_pedidos` (Google Doc) y léelo con `read_file_content`. Son temas que la gente pidió en comentarios: tienen prioridad. Si hay uno no hecho, ese es el tema (inventa un slug corto).
-3. Si no, toma el primer tema de `temas.json` cuyo slug no esté en el historial.
-4. Alterna: si el último fue de Latinoamérica, intenta que el siguiente sea de otra región (y viceversa), salvo pedidos.
+2. **Plan del día del analista (va primero):** busca `title contains 'MDD_plan_<AAAA-MM-DD de hoy>'` y léelo. Trae el tema del turno AM y del PM con slug, título, **gancho exacto**, ángulo, datos y fuentes. Si existe, usa el de tu turno tal cual (puedes mejorar el gancho, no cambiar el tema). Si su slug ya está en el historial, usa el otro turno o sigue al punto 3.
+3. Si no hay plan: busca el documento `MDD_pedidos` (Google Doc) y léelo con `read_file_content`. Son temas que la gente pidió en comentarios. Si hay uno no hecho, ese es el tema (inventa un slug corto).
+4. Si no, toma el primer tema de `temas.json` cuyo slug no esté en el historial.
+5. Alterna categorías (`pais`, `empresa`, `actualidad`): no repitas la misma categoría dos veces seguidas, salvo que el plan del analista diga otra cosa.
+6. Temas de **actualidad** (guerras, disputas, acuerdos, aranceles): siempre vistos por el lado del dinero (precios, comercio, quién gana y quién pierde), con noticias de los últimos días verificadas en 2+ fuentes. Nada de imágenes de violencia ni heridos; nada de opinar sobre gobiernos o bandos. **Casinos, loterías y apuestas**: solo educativo ("por qué la casa siempre gana"); nunca invitar a apostar, ni nombrar o mostrar casas de apuestas.
 
 ## 2. Investigar (5 min)
 - 3–5 búsquedas web. Necesitas 3–5 datos duros (años, cifras, porcentajes) **actuales y verificados**. Si una cifra cambia con el tiempo (PIB, población, fondos), usa la más reciente y redondea hacia abajo ("más de…", "unos…").
@@ -43,13 +45,15 @@ cd ~/mdd/kit/videos/<slug>
 - `LINES`: lo que se dice. **Números en palabras** ("mil novecientos sesenta y cinco", "uno coma cinco por ciento").
 - `SUBS`: lo mismo para subtítulos, **números en cifras** ("1965", "1,5%", "80.000"). Mismas palabras en el mismo orden; solo cambian los números.
 - 14–21 líneas, 190–240 palabras en total (≈ 70–85 s).
-- Estructura que funciona:
-  1. **Gancho en la primera línea** (≤ 3 s): una paradoja o cifra que choque ("Este país podría volver millonario a cada uno de sus habitantes… y decidió no hacerlo"). Las dos primeras palabras del guion deben ser distintivas (se usan para recortar el inicio del audio).
-  2. Presentar el país y la pregunta.
-  3. 3–4 razones **numeradas** ("Primero:", "Segundo:"…), cada una con un dato concreto.
-  4. Giro o dato curioso ("Y lo más irónico…").
-  5. Cierre con frase memorable.
-  6. Pregunta final para comentarios ("¿Qué país explico en el próximo video? Te leo en los comentarios." o una pregunta del tema que genere debate sano).
+- Estructura que funciona (pensada para que se queden hasta el final y luego entren al perfil):
+  1. **Gancho en la primera línea** (≤ 2,5 s, máx. 12 palabras): paradoja, cifra que choque o algo que le toca el bolsillo al que mira ("Cada vez que llenas el tanque, le pagas a un estrecho de 50 kilómetros"). Sin "Hola", sin presentarse, sin "en este video". Las dos primeras palabras del guion deben ser distintivas (se usan para recortar el inicio del audio). En la primera escena el texto grande en pantalla dice el gancho (o su cifra) desde el fotograma 1.
+  2. **Bucle abierto** en la línea 2 o 3: prometer algo que se resuelve al final ("…y al final te digo cuánto se queda de cada viaje", "el número uno no te lo vas a creer").
+  3. 3–4 razones **numeradas** ("Primero:", "Segundo:"…), cada una con un dato concreto. Frases cortas (máx. ~18 palabras). Cambio visual cada 2–4 s.
+  4. Giro o dato curioso ("Y lo más irónico…") justo pasada la mitad, para frenar la caída de audiencia.
+  5. Cerrar el bucle abierto con la cifra prometida.
+  6. **Llamada a ver más** (1 línea): enlaza con otro video del perfil o con una serie ("Y si quieres saber por qué Suiza es rica sin tener nada, está en mi perfil" o "Sígueme: mañana explico cómo gana dinero ___"). Alterna con la pregunta para comentarios ("¿Qué app explico en el próximo video? Te leo."). Las dos sirven; usa la que encaje.
+  7. Si el tema da para mucho, haz **Parte 1** y termina con un cliffhanger real; el analista programará la Parte 2 en el plan del día siguiente.
+- Portada: pregunta o cifra en 3–5 palabras enormes ("¿POR QUÉ LA CASA SIEMPRE GANA?"), con la cara/objeto del tema y colores vivos.
 
 ## 4. Voz y tiempos (≈ 3 min)
 ```
