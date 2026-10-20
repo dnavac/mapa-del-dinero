@@ -182,7 +182,7 @@ def geo_xy(T, geo):
 # ---------------------------------------------------------------- overlays
 def draw_overlay(fr, o, T):
     dt = T - o["t"]; k = o["kind"]
-    if dt < 0 or T > o["until"]: return
+    if dt < 0 or T >= o["until"]: return
     d = ImageDraw.Draw(fr)
     if k in ("title", "big"):
         size = o.get("size", 112 if k == "title" else 210)
