@@ -1,0 +1,9 @@
+{
+  "photo": "img/pexels/cocora_3.jpg",
+  "crop_y": 0.5,
+  "lines": [["COLOMBIA LO TIENE TODO", 104, "white"], ["¿POR QUÉ NO", 170, "yellow"], ["ES RICA?", 210, "yellow"]],
+  "pill": "4 razones que casi nadie explica",
+  "box": {"type": "vs", "left_label": "SINGAPUR", "left_value": "80.000", "left_color": "green",
+          "right_label": "COLOMBIA", "right_value": "8.600", "right_color": "red", "middle": "vs",
+          "caption": "US$ POR PERSONA AL AÑO"}
+}

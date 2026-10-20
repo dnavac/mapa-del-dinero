@@ -1,0 +1,6 @@
+videos/
+fonts/
+sfx/
+.env
+__pycache__/
+*.tgz

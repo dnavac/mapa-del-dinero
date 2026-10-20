@@ -1,0 +1,7 @@
+{
+  "photo": "img/pexels/city_0.jpg",
+  "crop_y": 0.45,
+  "lines": [["PANAMÁ NO TIENE", 140, "white"], ["MONEDA", 190, "yellow"], ["PROPIA", 200, "yellow"]],
+  "pill": "Y es de los más ricos de Latinoamérica",
+  "box": {"type": "single", "label": "PAGA CON DÓLARES DESDE", "value": "1904", "color": "green"}
+}

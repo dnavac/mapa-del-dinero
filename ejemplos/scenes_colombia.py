@@ -1,0 +1,97 @@
+CO = mapa.cid("Colombia")
+COL = (255, 205, 0)
+DARK = (40, 40, 40)
+BOG = (-74.07, 4.71); CTG = (-75.51, 10.39); BUN = (-77.03, 3.88)
+
+# L0 gancho: lo tiene todo (montaje rápido)
+cut(0.0, mapbg((-72.5, 5.5, 45), (-74.0, 5.6, 80), {CO: COL}), sfx=None)
+sfx(0.0, "impact", 0.8); sfx(0.0, "whoosh", 0.6)
+ov(tw(0, "oceanos"), "label", text="MAR CARIBE", geo=(-76.0, 12.3), color=BLUE); sfx(tw(0, "oceanos"), "pop", 0.6)
+ov(tw(0, "oceanos") + 0.25, "label", text="PACÍFICO", geo=(-77.7, 2.6), color=BLUE); sfx(tw(0, "oceanos") + 0.25, "pop", 0.6)
+for word, img, txt, col in [("petroleo", "oil_0", "PETRÓLEO", DARK), ("oro", "gold_0", "ORO", (212, 160, 23)),
+                            ("esmeraldas", "emerald_0", "ESMERALDAS", GREEN), ("cafes", "coffee_3", "CAFÉ", (120, 72, 40)),
+                            ("climas", "cocora_3", "TODOS LOS CLIMAS", BLUE)]:
+    t = tw(0, word)
+    cut(t, photo(P(img), 1.12, 1.0), sfx="whoosh_fast", gain=0.5)
+    ov(t, "title", text=txt, color=WHITE, box=col, y=380, size=120); sfx(t, "pop", 0.6)
+# L1 ¿por qué no es rica?
+sfx(tw(1) - 1.0, "riser", 0.6)
+cut(tw(1), photo(P("flag_2"), 1.0, 1.12, blur=4), sfx="impact", gain=0.5)
+ov(tw(1, "por"), "big", text="¿POR QUÉ NO|ES RICA?", color=YEL, y=480, size=150)
+# L2 Singapur vs Colombia
+cut(tw(2), photo(P("singapore_3"), 1.0, 1.12))
+ov(tw(2), "tag", text="SINGAPUR", y=300, color=WHITE, bg=RED); sfx(tw(2), "pop", 0.6)
+ov(tw(2, "80"), "counter", a=0, b=80000, dur=0.8, y=400, pre="+US$ ", thousands=True, size=180); sfx(tw(2, "80"), "coins", 0.8)
+ov(tw(2, "persona"), "chip", text="POR PERSONA AL AÑO", y=1100, x=540)
+cut(tw(2, "colombia"), photo(P("bogota_1"), 1.12, 1.0), sfx="whoosh_fast")
+ov(tw(2, "colombia"), "tag", text="COLOMBIA", y=300, color=DARK, bg=COL); sfx(tw(2, "colombia"), "pop", 0.6)
+ov(tw(2, "9000"), "title", text="MENOS DE|US$ 9.000", color=YEL, y=400); sfx(tw(2, "9000"), "stamp", 0.6)
+# L3 1. el mapa
+cut(tw(3), mapbg((-74.0, 5.6, 80), (-74.0, 5.5, 92), {CO: COL}))
+ov(tw(3), "title", text="1 · EL MAPA", color=WHITE, box=GREEN, y=330); sfx(tw(3), "ding", 0.6)
+# L4 los Andes, tres cordilleras, lejos del mar
+cut(tw(4), photo(P("andes_2"), 1.0, 1.12))
+ov(tw(4, "andes"), "title", text="LOS ANDES", color=WHITE, box=(139, 94, 52), y=380)
+ov(tw(4, "tres"), "chip", text="3 CORDILLERAS", y=1100, x=540); sfx(tw(4, "tres"), "pop", 0.6)
+cut(tw(4, "montanas"), photo(P("andes_0"), 1.12, 1.0), sfx="whoosh_fast")
+ov(tw(4, "mar"), "title", text="LEJOS DEL MAR", color=WHITE, box=DARK, y=380)
+# L5 Bogotá a 2.600 m, lejos del puerto
+cut(tw(5), photo(P("bogota_0"), 1.0, 1.12))
+ov(tw(5), "tag", text="BOGOTÁ", y=300, color=DARK, bg=COL)
+ov(tw(5, "2600"), "counter", a=0, b=2600, dur=0.7, y=400, suf=" m", thousands=True, size=200); sfx(tw(5, "2600"), "whoosh", 0.5)
+cut(tw(5, "puerto") - 0.3, mapbg((-75.3, 4.9, 120), (-75.6, 4.7, 135), {CO: COL}))
+ov(tw(5, "puerto") - 0.2, "pin", geo=BOG, text="BOGOTÁ"); sfx(tw(5, "puerto") - 0.2, "pop", 0.6)
+ov(tw(5, "puerto"), "pin", geo=BUN, text="PUERTO"); sfx(tw(5, "puerto"), "pop", 0.6)
+ov(tw(5, "puerto"), "arrow", a=BOG, b=BUN, dur=0.6, bend=-80)
+# L6 contenedor: casi el triple que a China
+cut(tw(6), photo(P("road_1"), 1.0, 1.12))
+ov(tw(6, "contenedor"), "title", text="UN CONTENEDOR DE|BOGOTÁ A CARTAGENA", color=WHITE, box=DARK, y=330, size=96); sfx(tw(6, "contenedor"), "pop", 0.6)
+ov(tw(6, "triple"), "stamp", text="CASI EL TRIPLE", color=RED, y=860); sfx(tw(6, "triple"), "stamp", 0.8)
+cut(tw(6, "mandarlo"), photo(P("ship_1"), 1.12, 1.0), sfx="whoosh_fast")
+ov(tw(6, "mandarlo"), "title", text="QUE MANDARLO|HASTA CHINA", color=YEL, y=340); sfx(tw(6, "china"), "horn", 0.6)
+# L7 2. informalidad
+cut(tw(7), photo(P("vendor_0"), 1.0, 1.12))
+ov(tw(7), "title", text="2 · INFORMALIDAD", color=WHITE, box=BLUE, y=330); sfx(tw(7), "ding", 0.6)
+ov(tw(7, "mitad"), "pie", frac=0.55, label="55%", y=780); sfx(tw(7, "mitad"), "pop", 0.7)
+cut(tw(7, "contrato"), photo(P("market_2"), 1.12, 1.0), sfx="whoosh_fast")
+ov(tw(7, "contrato"), "chip", text="SIN CONTRATO", y=820, x=540); sfx(tw(7, "contrato"), "pop", 0.6)
+ov(tw(7, "pension"), "chip", text="SIN PENSIÓN", y=930, x=540); sfx(tw(7, "pension"), "pop", 0.6)
+ov(tw(7, "seguridad"), "chip", text="SIN SEGURIDAD SOCIAL", y=1040, x=540); sfx(tw(7, "seguridad"), "pop", 0.6)
+# L8 empresas no crecen, el Estado recauda menos
+cut(tw(8), photo(P("office_1"), 1.0, 1.12))
+ov(tw(8, "empresas"), "title", text="EMPRESAS QUE|NO CRECEN", color=WHITE, box=DARK, y=340)
+ov(tw(8, "recaude"), "chip", text="EL ESTADO RECAUDA MENOS", y=1100, x=540); sfx(tw(8, "recaude"), "pop", 0.6)
+# L9 3. vende lo que saca de la tierra
+cut(tw(9), photo(P("coal_2"), 1.0, 1.12))
+ov(tw(9), "title", text="3 · VENDE LO QUE|SACA DE LA TIERRA", color=WHITE, box=(230, 126, 34), y=330, size=100); sfx(tw(9), "ding", 0.6)
+cut(tw(9, "petroleo"), photo(P("oil_0"), 1.12, 1.0), sfx="whoosh_fast")
+ov(tw(9, "4"), "pie", frac=0.38, label="4/10", y=780); sfx(tw(9, "4"), "coins", 0.7)
+ov(tw(9, "exporta"), "chip", text="DE CADA 10 DÓLARES QUE EXPORTA", y=1100, x=540)
+# L10 cuando el petróleo cae
+cut(tw(10), photo(P("chart_3"), 1.0, 1.12))
+ov(tw(10, "cae"), "title", text="SI EL PETRÓLEO|CAE...", color=WHITE, box=RED, y=340); sfx(tw(10, "cae"), "impact", 0.5)
+ov(tw(10, "siente"), "shake", dur=0.4)
+# L11 4. conflicto armado
+cut(tw(11), photo(P("jungle_2"), 1.0, 1.12))
+ov(tw(11), "title", text="4 · MÁS DE MEDIO SIGLO|DE CONFLICTO", color=WHITE, box=DARK, y=330, size=96); sfx(tw(11), "ding", 0.6)
+ov(tw(11, "inversion"), "chip", text="MENOS INVERSIÓN", y=990, x=540); sfx(tw(11, "inversion"), "pop", 0.6)
+ov(tw(11, "regiones"), "chip", text="REGIONES POR FUERA", y=1100, x=540); sfx(tw(11, "regiones"), "pop", 0.6)
+# L12 pero ojo: avances
+cut(tw(12), photo(P("medellin_1"), 1.12, 1.0))
+ov(tw(12), "big", text="PERO OJO", color=YEL, y=380, size=170); sfx(tw(12), "pop", 0.7)
+ov(tw(12, "pobreza"), "chip", text="LA POBREZA BAJÓ", y=900, x=540); sfx(tw(12, "pobreza"), "pop", 0.6)
+ov(tw(12, "clase"), "chip", text="CRECIÓ LA CLASE MEDIA", y=1010, x=540); sfx(tw(12, "clase"), "pop", 0.6)
+cut(tw(12, "turismo"), photo(P("cartagena_1"), 1.0, 1.12), sfx="whoosh_fast")
+ov(tw(12, "turismo"), "title", text="TURISMO|RÉCORD", color=WHITE, box=GREEN, y=340); sfx(tw(12, "turismo"), "ding", 0.7)
+# L13 conclusión
+cut(tw(13), photo(P("cocora_1"), 1.12, 1.0))
+ov(tw(13, "riqueza"), "title", text="NO LE FALTA|RIQUEZA", color=YEL, y=340); sfx(tw(13, "riqueza"), "impact", 0.5)
+cut(tw(13, "carreteras"), photo(P("highway_2"), 1.0, 1.12), sfx="whoosh_fast")
+ov(tw(13, "carreteras"), "chip", text="CARRETERAS", y=820, x=540); sfx(tw(13, "carreteras"), "pop", 0.6)
+ov(tw(13, "formal"), "chip", text="EMPLEO FORMAL", y=930, x=540); sfx(tw(13, "formal"), "pop", 0.6)
+ov(tw(13, "empresas"), "chip", text="EMPRESAS QUE VENDAN MÁS", y=1040, x=540); sfx(tw(13, "empresas"), "pop", 0.6)
+# L14 CTA
+cut(tw(14), photo(P("flag_0"), 1.15, 1.0))
+ov(tw(14), "big", text="¿QUÉ LE FALTA|A COLOMBIA?", color=YEL, y=290, size=115); sfx(tw(14), "pop", 0.8)
+ov(tw(14, "comentarios") - 0.4, "comment", y=880, txt="Educación, vías..."); sfx(tw(14, "comentarios") - 0.4, "pop", 0.8)
+ov(VOICE_END + 0.05, "follow", y=1090); sfx(VOICE_END + 0.05, "ding", 0.7)

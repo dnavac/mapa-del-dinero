@@ -1,0 +1,36 @@
+LINES = [
+    "Este país no tiene moneda propia... y aun así es de los más ricos de Latinoamérica.",
+    "Es Panamá. Y allá, desde hace más de cien años, se paga con dólares.",
+    "Todo empieza en mil novecientos tres: Panamá se separa de Colombia, con el apoyo de Estados Unidos.",
+    "¿Por qué? Porque Estados Unidos quería construir un canal entre dos océanos.",
+    "Al año siguiente, Panamá adopta el dólar. Su moneda, el balboa, existe... pero casi solo en monedas.",
+    "Y la única vez que intentaron imprimir billetes propios, en mil novecientos cuarenta y uno, circularon unos siete días. El presidente que los creó fue derrocado.",
+    "Hoy les dicen: los billetes de los siete días.",
+    "Pero el dólar le trajo algo valioso: confianza.",
+    "Primero: casi no hay inflación. El gobierno no puede imprimir dinero para tapar huecos.",
+    "Segundo: llegaron los bancos del mundo, y Panamá se volvió un centro financiero.",
+    "Y tercero: el canal. En su último año fiscal, le dejó ingresos de más de cinco mil millones de dólares.",
+    "Resultado: hoy está entre los países de Latinoamérica con mayor ingreso por persona.",
+    "Pero ojo: no tener moneda propia también tiene un precio. Si llega una crisis, Panamá no puede imprimir dinero ni devaluar. Le toca aguantar.",
+    "Panamá no se hizo rico por usar dólares. Se hizo rico por estar en el lugar exacto del mapa... y por usar una moneda en la que todo el mundo confía.",
+    "¿Tú cambiarías la moneda de tu país por el dólar? Te leo en los comentarios.",
+]
+
+SUBS = [
+    "Este país no tiene moneda propia... y aun así es de los más ricos de Latinoamérica.",
+    "Es Panamá. Y allá, desde hace más de 100 años, se paga con dólares.",
+    "Todo empieza en 1903: Panamá se separa de Colombia, con el apoyo de Estados Unidos.",
+    "¿Por qué? Porque Estados Unidos quería construir un canal entre dos océanos.",
+    "Al año siguiente, Panamá adopta el dólar. Su moneda, el balboa, existe... pero casi solo en monedas.",
+    "Y la única vez que intentaron imprimir billetes propios, en 1941, circularon unos 7 días. El presidente que los creó fue derrocado.",
+    "Hoy les dicen: los billetes de los siete días.",
+    "Pero el dólar le trajo algo valioso: confianza.",
+    "Primero: casi no hay inflación. El gobierno no puede imprimir dinero para tapar huecos.",
+    "Segundo: llegaron los bancos del mundo, y Panamá se volvió un centro financiero.",
+    "Y tercero: el canal. En su último año fiscal, le dejó ingresos de más de 5.000 millones de dólares.",
+    "Resultado: hoy está entre los países de Latinoamérica con mayor ingreso por persona.",
+    "Pero ojo: no tener moneda propia también tiene un precio. Si llega una crisis, Panamá no puede imprimir dinero ni devaluar. Le toca aguantar.",
+    "Panamá no se hizo rico por usar dólares. Se hizo rico por estar en el lugar exacto del mapa... y por usar una moneda en la que todo el mundo confía.",
+    "¿Tú cambiarías la moneda de tu país por el dólar? Te leo en los comentarios.",
+]
+assert len(LINES) == len(SUBS)

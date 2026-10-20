@@ -1,0 +1,36 @@
+LINES = [
+    "Colombia tiene dos océanos, petróleo, oro, esmeraldas, uno de los cafés más famosos del mundo... y casi todos los climas.",
+    "Entonces, ¿por qué no es un país rico?",
+    "Singapur, que no tiene nada de eso, produce más de ochenta mil dólares por persona. Colombia, menos de nueve mil.",
+    "La primera razón está en el mapa.",
+    "Los Andes parten a Colombia en tres cordilleras. Y la mayoría de la gente vive en las montañas, lejos del mar.",
+    "Bogotá está a dos mil seiscientos metros de altura, a cientos de kilómetros del puerto más cercano.",
+    "Hace unos años, llevar un contenedor de Bogotá a Cartagena costaba casi el triple que mandarlo de Cartagena a China.",
+    "La segunda: más de la mitad de los trabajadores son informales. Sin contrato, sin pensión, sin seguridad social.",
+    "Y con tanta informalidad, es muy difícil que las empresas crezcan y que el Estado recaude.",
+    "La tercera: Colombia vende sobre todo lo que saca de la tierra. Petróleo, carbón y minería son casi cuatro de cada diez dólares que exporta.",
+    "Y cuando el precio del petróleo cae, el país entero lo siente.",
+    "Y la cuarta: más de medio siglo de conflicto armado, que espantó la inversión y dejó regiones enteras por fuera del desarrollo.",
+    "Pero ojo: Colombia no está quieta. En las últimas décadas la pobreza bajó, la clase media creció, y el turismo rompe récords.",
+    "Colombia no es pobre por falta de riqueza. Le falta convertir esa riqueza en carreteras, empleo formal, y empresas que vendan algo más que petróleo.",
+    "¿Tú qué crees que le falta a Colombia? Te leo en los comentarios.",
+]
+
+SUBS = [
+    "Colombia tiene dos océanos, petróleo, oro, esmeraldas, uno de los cafés más famosos del mundo... y casi todos los climas.",
+    "Entonces, ¿por qué no es un país rico?",
+    "Singapur, que no tiene nada de eso, produce más de 80.000 dólares por persona. Colombia, menos de 9.000.",
+    "La primera razón está en el mapa.",
+    "Los Andes parten a Colombia en tres cordilleras. Y la mayoría de la gente vive en las montañas, lejos del mar.",
+    "Bogotá está a 2.600 metros de altura, a cientos de kilómetros del puerto más cercano.",
+    "Hace unos años, llevar un contenedor de Bogotá a Cartagena costaba casi el triple que mandarlo de Cartagena a China.",
+    "La segunda: más de la mitad de los trabajadores son informales. Sin contrato, sin pensión, sin seguridad social.",
+    "Y con tanta informalidad, es muy difícil que las empresas crezcan y que el Estado recaude.",
+    "La tercera: Colombia vende sobre todo lo que saca de la tierra. Petróleo, carbón y minería son casi 4 de cada 10 dólares que exporta.",
+    "Y cuando el precio del petróleo cae, el país entero lo siente.",
+    "Y la cuarta: más de medio siglo de conflicto armado, que espantó la inversión y dejó regiones enteras por fuera del desarrollo.",
+    "Pero ojo: Colombia no está quieta. En las últimas décadas la pobreza bajó, la clase media creció, y el turismo rompe récords.",
+    "Colombia no es pobre por falta de riqueza. Le falta convertir esa riqueza en carreteras, empleo formal, y empresas que vendan algo más que petróleo.",
+    "¿Tú qué crees que le falta a Colombia? Te leo en los comentarios.",
+]
+assert len(LINES) == len(SUBS)
