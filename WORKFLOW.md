@@ -119,20 +119,24 @@ Ver el formato en `engine/cover.py`. Foto **clara** (cielo, ciudad de día, pais
 2–3 frases: gancho + promesa + pregunta para comentar, 1–3 emojis, **máximo 5 hashtags** (el país, #economia, #historia, #curiosidades y uno más del tema).
 
 ## 11. Programar en Metricool (publicación automática en TikTok)
-Metricool necesita el video en un enlace público: se sube como *release* del repo **dnavac/mapa-del-dinero**.
-1. Prepara el archivo para TikTok (la portada como primeros 0,1 s, porque en cuentas personales TikTok usa el primer fotograma como portada):
+Metricool necesita el video en un enlace público. Se publica en la rama **`media`** del repo dnavac/mapa-del-dinero (las *releases* de GitHub están bloqueadas en estas sesiones). Metricool copia el archivo a su servidor apenas se programa, así que la rama solo guarda lo último.
+1. Archivo para TikTok (la portada como primeros 0,1 s; en cuentas personales TikTok usa el primer fotograma como portada):
    `python3 ~/mdd/kit/engine/finalize.py` → `out/publicar.mp4`
-2. Release (tag `AAAA-MM-DD-AM|PM-<slug>`):
-   `gh release create <tag> out/publicar.mp4 out/portada.png -R dnavac/mapa-del-dinero -t "<título>" -n "Video para Metricool"`
-   URL: `https://github.com/dnavac/mapa-del-dinero/releases/download/<tag>/publicar.mp4`. Comprueba con `curl -sIL <url> | grep -i "^HTTP\|content-length"` que termina en 200 y pesa lo mismo que el archivo.
-3. Limpieza: borra releases de más de 7 días (`gh release list -R dnavac/mapa-del-dinero --json tagName,createdAt` y `gh release delete <tag> -R dnavac/mapa-del-dinero --cleanup-tag -y`).
-4. Metricool: marca `blogId` **7532700** (TikTok @velkorax6s), zona horaria `America/Bogota`.
-   - Horarios: turno AM → hoy **12:00**; turno PM → hoy **19:00**. Revisa con `getScheduledPosts` (hoy) que ese horario esté libre; si ya hay algo o faltan menos de 15 min, usa el siguiente horario libre en pasos de 30 min.
-   - `createScheduledPost` con `blogId: "7532700"`, `date` en ISO con −05:00, e `info` (JSON en texto):
-     `{"autoPublish": true, "draft": false, "descendants": [], "firstCommentText": "", "hasNotReadNotes": false, "shortener": false, "smartLinkData": {"ids": []}, "media": ["<URL de publicar.mp4>"], "mediaAltText": [], "providers": [{"network": "tiktok"}], "publicationDate": {"dateTime": "AAAA-MM-DDTHH:MM:00", "timezone": "America/Bogota"}, "text": "<descripción con máx. 5 hashtags>", "tiktokData": {"disableComment": false, "disableDuet": false, "disableStitch": false, "privacyOption": "PUBLIC_TO_EVERYONE", "commercialContentThirdParty": false, "commercialContentOwnBrand": false, "autoAddMusic": false, "isAigc": true}}`
+2. Súbelo a la rama `media` (reemplaza su contenido; nunca subas claves ni `.env`):
+```
+rm -rf /tmp/media && mkdir /tmp/media && cd /tmp/media && git init -q -b media
+cp ~/mdd/kit/videos/<slug>/out/publicar.mp4 <AAAA-MM-DD>-<slug>.mp4
+git add -A && git -c user.name="Diego Navarro" -c user.email="dnavac@users.noreply.github.com" commit -q -m "Media para Metricool: <slug>"
+git remote add origin https://github.com/dnavac/mapa-del-dinero && git push -f origin media
+```
+   URL: `https://raw.githubusercontent.com/dnavac/mapa-del-dinero/media/<AAAA-MM-DD>-<slug>.mp4`. Comprueba con `curl -sIL <url> | grep -i "^HTTP/\|^content-length"` que da 200 y el mismo tamaño.
+3. Metricool: marca `blogId` **7532700** (TikTok), zona horaria `America/Bogota`.
+   - Horarios: turno AM → hoy **12:00**; turno PM → hoy **19:00**. Revisa con `getScheduledPosts` (hoy) que el horario esté libre; si está ocupado o faltan menos de 15 min, usa el siguiente horario libre en pasos de 30 min.
+   - `createScheduledPost` con `blogId: "7532700"`, `date` en ISO con −05:00, e `info` (JSON en texto). **`tiktokData.title` es obligatorio** (el título corto del video):
+     `{"autoPublish": true, "draft": false, "descendants": [], "firstCommentText": "", "hasNotReadNotes": false, "shortener": false, "smartLinkData": {"ids": []}, "media": ["<URL>"], "mediaAltText": [], "providers": [{"network": "tiktok"}], "publicationDate": {"dateTime": "AAAA-MM-DDTHH:MM:00", "timezone": "America/Bogota"}, "text": "<descripción con máx. 5 hashtags>", "tiktokData": {"title": "<título corto>", "disableComment": false, "disableDuet": false, "disableStitch": false, "privacyOption": "PUBLIC_TO_EVERYONE", "commercialContentThirdParty": false, "commercialContentOwnBrand": false, "autoAddMusic": false, "isAigc": true}}`
    - `isAigc: true` porque la voz es generada con IA (TikTok pide declararlo).
-   - Confirma con `getScheduledPosts` que quedó y guarda el `plannerUrl`.
-   - Si Metricool o GitHub fallan, no te detengas: entrega igual (paso 12) y di en el mensaje que la publicación automática no se hizo y por qué.
+   - Guarda el `plannerUrl` de la respuesta.
+   - Si GitHub o Metricool fallan, no te detengas: entrega igual (paso 12) y di en el mensaje que la publicación automática no se hizo y por qué.
 
 ## 12. Entregar
 1. `SendUserFile` con `out/video.mp4` y `out/portada.png` (status `proactive`), con un pie corto: tema y hora a la que se publica en TikTok (o "no se programó" y por qué).
