@@ -3,6 +3,8 @@
 Canal de Diego: **Mapa del Dinero** (TikTok registrado en Francia, contenido en español; también YouTube Shorts, Reels y Facebook).
 Temas: economía y geopolítica explicada en 3 líneas — **países** ("¿Por qué [país] es rico/pobre?"), **empresas y apps** ("¿Cómo gana dinero ___?", casinos, juegos gratis…) y **actualidad** (guerras, disputas, aranceles y acuerdos vistos por el lado del dinero). Objetivo n.º 1: que se vuelva viral — gancho fuerte, que vean hasta el final y que entren al perfil a ver más. Meta: seguidores, reproducciones, comentarios y llegar a la monetización de YouTube antes del 1 de febrero de 2027.
 
+> **Cambio del 24-oct-2026 (lo pidió Diego):** videos de **35–50 s**, cada uno episodio numerado de una serie (`series.json`), con botón de seguir a mitad y cierre que anuncia el próximo episodio. Si el mensaje de la tarea todavía dice "60–90 s", está desactualizado: manda este documento.
+
 ## Reglas fijas (Diego las pidió)
 - Todo en español. Responder a Diego en español.
 - **Una sola voz corrida** con todo el guion (Google TTS, voz Charon, modelo gemini-3.8-flash-tts). Nunca una voz por escena. Sobre esa voz se cuadran imágenes, animaciones y efectos.
