@@ -30,7 +30,12 @@ W=words("audio/tight.wav")
 nw=[norm(v["w"]) for v in W]
 from script import LINES
 fw = [norm(w) for w in LINES[0].split()[:2]]
-start=next(i for i in range(len(nw)-1) if nw[i]==fw[0] and nw[i+1]==fw[1])
+try:
+    start=next(i for i in range(len(nw)-1) if nw[i]==fw[0] and nw[i+1]==fw[1])
+except StopIteration:
+    f3=[norm(w) for w in LINES[0].split()[2:4]]
+    print("fallback; heard:", nw[:15])
+    start=next(i for i in range(len(nw)-1) if nw[i]==f3[0] and nw[i+1]==f3[1])-2
 cut=max(0,int((W[start]["s"]-0.06)*sr))
 if start>0: cut=max(cut,int(W[start-1]["e"]*sr))
 y=y[cut:]
