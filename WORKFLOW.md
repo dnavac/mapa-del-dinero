@@ -11,7 +11,8 @@ Temas: economía y geopolítica explicada en 3 líneas — **países** ("¿Por q
 - **Efectos de sonido suaves** (el motor ya los mezcla bajo: factor 0.28; no subirlo; ganancias por efecto entre 0.5 y 0.9).
 - **Máximo 5 hashtags** por publicación.
 - Cada video lleva **portada** (una sola para todas las plataformas) y **descripción**.
-- Duración **60–90 s** (TikTok solo paga videos de más de 1 minuto).
+- Duración **35–50 s** (cambio del 24-oct-2026: el canal necesita seguidores antes que monetización; TikTok solo paga desde 10.000 seguidores, así que hasta llegar ahí manda la retención).
+- **Cada video es un episodio de una serie** con nombre y número (`series.json`). La serie es la razón para seguir: la gente sigue cuando sabe que viene otro igual.
 - Datos verificados con búsqueda web. Tono de datos, sin opinar de política ni señalar partidos o gobiernos.
 
 ## 0. Preparar (una vez por sesión, ~3 min)
@@ -30,7 +31,8 @@ Debe terminar en `SETUP OK`. No hagas `git commit` ni `git push` del kit: solo s
 3. Si no hay plan: busca el documento `MDD_pedidos` (Google Doc) y léelo con `read_file_content`. Son temas que la gente pidió en comentarios. Si hay uno no hecho, ese es el tema (inventa un slug corto).
 4. Si no, toma el primer tema de `temas.json` cuyo slug no esté en el historial.
 5. Alterna categorías (`pais`, `empresa`, `actualidad`): no repitas la misma categoría dos veces seguidas, salvo que el plan del analista diga otra cosa.
-6. Temas de **actualidad** (guerras, disputas, acuerdos, aranceles): siempre vistos por el lado del dinero (precios, comercio, quién gana y quién pierde), con noticias de los últimos días verificadas en 2+ fuentes. Nada de imágenes de violencia ni heridos; nada de opinar sobre gobiernos o bandos. **Casinos, loterías y apuestas**: solo educativo ("por qué la casa siempre gana"); nunca invitar a apostar, ni nombrar o mostrar casas de apuestas.
+6. **Serie y número**: si el plan los trae, úsalos tal cual. Si no, lee `series.json`, elige la serie que corresponda al tema (por categoría y promesa) y calcula el número: episodios listados en `series.json` + archivos `MDD_hist_*` cuyo contenido diga `Serie: <nombre>` y no estén ya en esa lista, + 1. Elige también el **próximo episodio** que vas a anunciar al final (de `ideas` de la misma serie, que no esté en el historial).
+7. Temas de **actualidad** (guerras, disputas, acuerdos, aranceles): siempre vistos por el lado del dinero (precios, comercio, quién gana y quién pierde), con noticias de los últimos días verificadas en 2+ fuentes. Nada de imágenes de violencia ni heridos; nada de opinar sobre gobiernos o bandos. **Casinos, loterías y apuestas**: solo educativo ("por qué la casa siempre gana"); nunca invitar a apostar, ni nombrar o mostrar casas de apuestas.
 
 ## 2. Investigar (5 min)
 - 3–5 búsquedas web. Necesitas 3–5 datos duros (años, cifras, porcentajes) **actuales y verificados**. Si una cifra cambia con el tiempo (PIB, población, fondos), usa la más reciente y redondea hacia abajo ("más de…", "unos…").
@@ -44,16 +46,18 @@ cd ~/mdd/kit/videos/<slug>
 `script.py` con dos listas del mismo largo (ver `ejemplos/script_*.py`):
 - `LINES`: lo que se dice. **Números en palabras** ("mil novecientos sesenta y cinco", "uno coma cinco por ciento").
 - `SUBS`: lo mismo para subtítulos, **números en cifras** ("1965", "1,5%", "80.000"). Mismas palabras en el mismo orden; solo cambian los números.
-- 14–21 líneas, 190–240 palabras en total (≈ 70–85 s).
-- Estructura que funciona (pensada para que se queden hasta el final y luego entren al perfil):
-  1. **Gancho en la primera línea** (≤ 2,5 s, máx. 12 palabras): paradoja, cifra que choque o algo que le toca el bolsillo al que mira ("Cada vez que llenas el tanque, le pagas a un estrecho de 50 kilómetros"). Sin "Hola", sin presentarse, sin "en este video". Las dos primeras palabras del guion deben ser distintivas (se usan para recortar el inicio del audio). En la primera escena el texto grande en pantalla dice el gancho (o su cifra) desde el fotograma 1.
-  2. **Bucle abierto** en la línea 2 o 3: prometer algo que se resuelve al final ("…y al final te digo cuánto se queda de cada viaje", "el número uno no te lo vas a creer").
-  3. 3–4 razones **numeradas** ("Primero:", "Segundo:"…), cada una con un dato concreto. Frases cortas (máx. ~18 palabras). Cambio visual cada 2–4 s.
-  4. Giro o dato curioso ("Y lo más irónico…") justo pasada la mitad, para frenar la caída de audiencia.
+- **10–13 líneas, 100–140 palabras en total (≈ 35–50 s).** Si te sobra material, quita razones, no aceleres. Mejor 3 datos que se entienden que 6 que se pierden.
+- Tono: **como un amigo que te cuenta algo increíble**, no como un noticiero ni un documental. Frases de máx. ~14 palabras, palabras de la calle ("plata", "o sea", "imagínate"), segunda persona ("tú", "tu bolsillo").
+- Estructura (pensada para que se queden hasta el final **y luego sigan la cuenta**):
+  1. **Gancho en la primera línea** (≤ 2,5 s, máx. 12 palabras): paradoja, cifra que choque o algo que le toca el bolsillo al que mira. El formato que más ha funcionado en el canal: **cifra gigante + "…y aun así"** ("Estados Unidos debe más de 40 billones… y aun así todos le prestan"). Sin "Hola", sin presentarse, sin "en este video". Las dos primeras palabras del guion deben ser distintivas (se usan para recortar el inicio del audio). En la primera escena el texto grande en pantalla dice el gancho (o su cifra) desde el fotograma 1.
+  2. **Línea 2: serie + bucle abierto en la misma frase corta**: la `frase_serie` de `series.json` o una versión breve, y la promesa que se resuelve al final ("Episodio seis de los países ricos sin nada… y al final te digo quién le presta"). Máx. 18 palabras.
+  3. 2–3 razones **numeradas** ("Primero:", "Segundo:"…), cada una con un dato concreto. Cambio visual cada 2–3 s.
+  4. Giro o dato curioso ("Y lo más loco…") justo pasada la mitad.
   5. Cerrar el bucle abierto con la cifra prometida.
-  6. **Llamada a ver más** (1 línea): enlaza con otro video del perfil o con una serie ("Y si quieres saber por qué Suiza es rica sin tener nada, está en mi perfil" o "Sígueme: mañana explico cómo gana dinero ___"). Alterna con la pregunta para comentarios ("¿Qué app explico en el próximo video? Te leo."). Las dos sirven; usa la que encaje.
-  7. Si el tema da para mucho, haz **Parte 1** y termina con un cliffhanger real; el analista programará la Parte 2 en el plan del día siguiente.
-- Portada: pregunta o cifra en 3–5 palabras enormes ("¿POR QUÉ LA CASA SIEMPRE GANA?"), con la cara/objeto del tema y colores vivos.
+  6. **Cierre para seguir (1 línea, siempre)**: anuncia el **próximo episodio concreto** de la serie y pide seguir para verlo: "El próximo de la serie es Dinamarca. Sígueme para no perdértelo." Nunca un "sígueme" sin razón.
+  7. **Pregunta para comentar** (en la descripción y en el texto final de pantalla, no hace falta decirla): de **una palabra o sí/no**, fácil de contestar ("¿Le prestarías tú? SÍ o NO", "Escribe tu país"). Nada de preguntas abiertas largas.
+  8. Nada de "Parte 1 / Parte 2": no funcionaron. Si el tema da para más, es otro episodio de la serie con título propio.
+- Portada: pregunta o cifra en 3–5 palabras enormes ("¿POR QUÉ LA CASA SIEMPRE GANA?"), con la cara/objeto del tema y colores vivos. La **píldora roja** lleva el nombre de la serie y el número ("RICOS SIN NADA #6"): así el perfil se ve como una colección.
 
 ## 4. Voz y tiempos (≈ 3 min)
 ```
@@ -62,7 +66,7 @@ python3 tts.py && python3 prep_voice.py && python3 align.py
 - `tts.py` genera **un solo audio** de todo el guion. El modelo no acepta instrucción de sistema (error 400 "Developer instruction"): es normal, cae al modo con prefijo y `prep_voice.py` recorta lo que sobra.
 - `prep_voice.py` acorta silencios, recorta el inicio y saca tiempos por palabra con Whisper.
 - `align.py` imprime inicio/fin de cada línea y las diferencias con lo que entendió Whisper (es normal ver `replace` en números o nombres propios).
-- Si la duración final queda < 60 s, alarga el guion y repite.
+- Si la duración final queda > 52 s, recorta el guion y repite; si queda < 32 s, alárgalo.
 
 ## 5. Imágenes
 - `queries.json`: 16–24 búsquedas en inglés para Pexels, `{"nombre": "consulta"}` (ej. `"port": "container port cranes"`). Fotos claras, reales, del país y de cada idea.
@@ -92,7 +96,9 @@ Copia el estilo de `~/mdd/kit/ejemplos/scenes_colombia.py` (y singapur/noruega).
 - `"xmark"` (X roja grande), `"ban"` (prohibido, `y`), `"lock"` (candado, `y, mode="close"`), `"crack"` (vidrio roto, `y`), `"people"` (2 de 3 personas, `y`).
 - En mapas: `"label"` (`text, geo=(lon,lat), color`), `"pin"` (`geo, text`), `"ring"` (pulso sobre un punto, `geo`), `"arrow"` (`a=(lon,lat), b=(lon,lat), dur, bend=-200..0`).
 - `"shake"` (`dur=0.4`) sacude la pantalla.
-- Final: `"comment"` (burbuja que se escribe, `y=880, txt="Japón, Noruega..."`) y `"follow"` (botón + SÍGUEME, `y=1090`) en `VOICE_END + 0.05`.
+- **Serie (obligatorio)**: `ov(0, "tag", text="RICOS SIN NADA #6", y=200, color=WHITE, bg=RED, until=VOICE_END)` (con el tag y número de la serie): queda visible todo el video arriba, para que desde el primer segundo se vea que es una colección. Que no choque con los `"title"` (súbelos a y ≥ 330).
+- **Seguir a mitad de video (obligatorio)**: `ov(t, "follow", y=1090, until=t + 1.8)` con `t` = cuando termina la primera razón (≈ 40 % del video), y `sfx(t, "pop", 0.6)`. Es silencioso: no lo digas en la voz. Que no tape chips ni pines en esa zona.
+- Final: `"comment"` (burbuja que se escribe, `y=880`, `txt=` la respuesta de una palabra que esperas, p. ej. `"SÍ / NO"` o `"Colombia, México..."`) y `"follow"` (botón + SÍGUEME, `y=1090`) cuando la voz dice "Sígueme" en la última línea (`tw(<última línea>, "sigueme")`), no después.
 
 **Efectos**: `sfx(t, nombre, ganancia)` con nombres: `whoosh, whoosh_fast, impact, pop, ticktock, coins, ding, stamp, lock, riser, war, shatter, bubble, horn`. Uno por evento visual, ganancia 0.5–0.9. `riser` 1 s antes de una pregunta grande.
 
@@ -112,15 +118,15 @@ python3 render.py > out/render.log 2>&1
 ```
 Genera `out/video.mp4` (con volumen normalizado a −15 LUFS). Revisa:
 ```
-python3 ~/mdd/kit/engine/sheets.py final 0.8 5 12 20 28 36 44 52 60 68 75 <fin-1>
+python3 ~/mdd/kit/engine/sheets.py final 0.8 4 8 12 16 20 25 30 35 40 45 <fin-1>
 ```
-Mira `out/sheet_final.jpg`; LUFS ≈ −15 y duración > 60 s.
+Mira `out/sheet_final.jpg`; LUFS ≈ −15 y duración entre 32 y 55 s. Comprueba que se ve la etiqueta de la serie al inicio y el botón de seguir a mitad y al final.
 
 ## 9. Portada → `cover.json`
 Ver el formato en `engine/cover.py`. Foto **clara** (cielo, ciudad de día, paisaje), 2–3 líneas grandes (la pregunta o la paradoja), una píldora roja corta y una caja con el dato más llamativo (`single` o `vs`). `python3 cover.py` → `out/portada.png`. Mírala con Read.
 
 ## 10. Descripción
-2–3 frases: gancho + promesa + pregunta para comentar, 1–3 emojis, **máximo 5 hashtags** (el país, #economia, #historia, #curiosidades y uno más del tema).
+Primera línea: `<Nombre de la serie> #<N>`. Luego 2 frases: gancho + pregunta de una palabra o SÍ/NO para comentar. Cierra con "Sigue la serie: el próximo es <próximo episodio>." 1–3 emojis, **máximo 5 hashtags** (el país, #economia, #curiosidades y dos del tema).
 
 ## 11. Programar en Metricool (publicación automática en TikTok, Instagram, Facebook y YouTube)
 Metricool necesita el video en un enlace público. Se publica en la rama **`media`** del repo dnavac/mapa-del-dinero (las *releases* de GitHub están bloqueadas en estas sesiones). Metricool copia el archivo a su servidor apenas se programa, así que la rama solo guarda lo último.
@@ -134,7 +140,7 @@ git add -A && git -c user.name="Diego Navarro" -c user.email="dnavac@users.norep
 git remote add origin https://github.com/dnavac/mapa-del-dinero && git push -f origin media
 ```
    URL: `https://raw.githubusercontent.com/dnavac/mapa-del-dinero/media/<AAAA-MM-DD>-<slug>.mp4`. Comprueba con `curl -sIL <url> | grep -i "^HTTP/\|^content-length"` que da 200 y el mismo tamaño.
-3. Metricool: marca `blogId` **7532700** (TikTok @velkorax6s, Instagram @mapadeldinero.tv, Facebook y YouTube conectados), zona horaria `America/Bogota`. **Una sola publicación con los 4 `providers`.**
+3. Metricool: marca `blogId` **7532700** (TikTok @mapadeldinero, Instagram @mapadeldinero.tv, Facebook y YouTube conectados), zona horaria `America/Bogota`. **Una sola publicación con los 4 `providers`.**
    - Horarios: turno AM → hoy **12:00**; turno PM → hoy **19:00**. Revisa con `getScheduledPosts` (hoy) que el horario esté libre; si está ocupado o faltan menos de 15 min, usa el siguiente horario libre en pasos de 30 min.
    - `createScheduledPost` con `blogId: "7532700"`, `date` en ISO con −05:00, e `info` (JSON en texto). **`tiktokData.title` es obligatorio** (el título corto del video):
      `{"autoPublish": true, "draft": false, "descendants": [], "firstCommentText": "", "hasNotReadNotes": false, "shortener": false, "smartLinkData": {"ids": []}, "media": ["<URL>"], "mediaAltText": [], "providers": [{"network": "tiktok"}, {"network": "instagram"}, {"network": "facebook"}, {"network": "youtube"}], "publicationDate": {"dateTime": "AAAA-MM-DDTHH:MM:00", "timezone": "America/Bogota"}, "text": "<descripción con máx. 5 hashtags>", "tiktokData": {"title": "<título corto>", "disableComment": false, "disableDuet": false, "disableStitch": false, "privacyOption": "PUBLIC_TO_EVERYONE", "commercialContentThirdParty": false, "commercialContentOwnBrand": false, "autoAddMusic": false, "isAigc": true}, "instagramData": {"type": "REEL", "showReelOnFeed": true, "isAiGenerated": true}, "facebookData": {"type": "REEL"}, "youtubeData": {"title": "<título del video, máx. 90 caracteres> #shorts", "type": "short", "privacy": "public", "madeForKids": false, "category": "EDUCATION"}}`
@@ -147,4 +153,4 @@ git remote add origin https://github.com/dnavac/mapa-del-dinero && git push -f o
 ## 12. Entregar
 1. `SendUserFile` con `out/video.mp4` y `out/portada.png` (status `proactive`), con un pie corto: tema y hora a la que se publica en TikTok (o "no se programó" y por qué).
 2. `SendUserMessage` con: hora de publicación en TikTok y el enlace `plannerUrl` (Diego puede cancelarla desde Metricool antes de esa hora); en qué redes quedó programado (TikTok, Instagram, Facebook, YouTube); y debajo las fuentes (enlaces).
-3. En Google Drive, dentro de la carpeta cuyo id viene en el mensaje de la tarea, crea un archivo de texto `MDD_hist_AAAA-MM-DD_AM|PM_<slug>` (`contentMimeType: text/plain`, `disableConversionToGoogleType: true`) con: título del video, hora programada, descripción y fuentes. Así la próxima tarea no repite el tema.
+3. En Google Drive, dentro de la carpeta cuyo id viene en el mensaje de la tarea, crea un archivo de texto `MDD_hist_AAAA-MM-DD_AM|PM_<slug>` (`contentMimeType: text/plain`, `disableConversionToGoogleType: true`) con: una primera línea `Serie: <nombre> #<N>`, una segunda `Próximo anunciado: <slug>`, y luego título del video, hora programada, descripción y fuentes. Así la próxima tarea no repite el tema, sabe qué número sigue y cumple el episodio que se prometió.

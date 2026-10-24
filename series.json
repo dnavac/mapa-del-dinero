@@ -1,0 +1,55 @@
+{
+ "nota": "Cada video pertenece a UNA serie con nombre y número. La serie es la promesa de por qué seguir el canal: quien ve un episodio sabe que vienen más iguales. El número del próximo episodio = episodios ya hechos + 1 (cuenta los archivos MDD_hist_* que digan 'Serie: <nombre>', más los episodios listados aquí). El analista asigna serie y número en el plan del día; si no hay plan, la producción elige la serie que toque según la categoría del tema.",
+ "series": [
+  {
+   "id": "ricos-sin-nada",
+   "nombre": "Ricos sin nada",
+   "tag": "RICOS SIN NADA",
+   "categoria": "pais",
+   "promesa": "Países que se hicieron ricos sin petróleo, sin minas o sin tierra.",
+   "frase_serie": "Esta es la serie de países que se hicieron ricos sin tener nada.",
+   "episodios": ["suiza", "singapur", "japon", "paises-bajos-comida", "luxemburgo"],
+   "ideas": ["dinamarca", "irlanda", "islandia", "hong-kong", "botsuana", "taiwan-chips"]
+  },
+  {
+   "id": "deudas-imposibles",
+   "nombre": "Deudas imposibles",
+   "tag": "DEUDAS IMPOSIBLES",
+   "categoria": "pais",
+   "promesa": "Países y empresas que deben cifras absurdas y cómo siguen en pie (o no).",
+   "frase_serie": "Esta es la serie de las deudas más imposibles del mundo.",
+   "episodios": ["eeuu-deuda", "japon-deuda"],
+   "ideas": ["grecia-deuda", "italia-deuda", "argentina-fmi", "evergrande", "sri-lanka-quiebra", "china-deuda-local"]
+  },
+  {
+   "id": "mas-pobre-que-colombia",
+   "nombre": "Antes más pobre que Colombia",
+   "tag": "ANTES MÁS POBRE QUE COLOMBIA",
+   "categoria": "pais",
+   "promesa": "Países que hace 50 años eran más pobres que Colombia y hoy son mucho más ricos. Comparación directa con Colombia y Latinoamérica.",
+   "frase_serie": "Esta es la serie de países que eran más pobres que Colombia… y ya no.",
+   "episodios": ["corea-del-sur"],
+   "ideas": ["china", "polonia", "malasia", "vietnam", "chile-vs-colombia", "portugal"]
+  },
+  {
+   "id": "lo-que-te-cuesta",
+   "nombre": "Lo que te cuesta la noticia",
+   "tag": "LO QUE TE CUESTA LA NOTICIA",
+   "categoria": "actualidad",
+   "promesa": "La noticia del día explicada por lo que le cuesta a tu bolsillo.",
+   "frase_serie": "Esta es la serie que te explica cuánto te cuesta la noticia.",
+   "episodios": ["ormuz", "petroleo-110-ganadores-perdedores", "diesel-mercado", "oro-cae-guerra"],
+   "ideas": []
+  },
+  {
+   "id": "asi-gana-dinero",
+   "nombre": "Así gana dinero",
+   "tag": "ASÍ GANA DINERO",
+   "categoria": "empresa",
+   "promesa": "Cómo ganan plata las apps, juegos y empresas que usas todos los días.",
+   "frase_serie": "Esta es la serie de cómo ganan dinero las apps que usas.",
+   "episodios": ["ea-arabia-saudita-deuda"],
+   "ideas": ["como-gana-casino", "temu", "free-fire", "spotify", "duolingo", "netflix"]
+  }
+ ]
+}
