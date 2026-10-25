@@ -31,9 +31,12 @@ def gradient(top=(214, 236, 255), bottom=(255, 250, 238)):
 def bg(top=(214, 236, 255), bottom=(255, 250, 238)):
     return gradient(top, bottom).copy().convert("RGBA")
 
+PESOS = ((226, 206, 236), (118, 64, 140), (76, 34, 96))   # paleta morada para billetes de pesos
+
 @lru_cache(maxsize=8)
-def bill(w=620):
-    """Billete de 100 dólares estilizado (dibujo propio, no una reproducción)."""
+def bill(w=620, num="100", word="DÓLARES", pal=None):
+    """Billete estilizado (dibujo propio, no una reproducción). pal=(claro, medio, oscuro)."""
+    BILL, BILL_D, BILL_DD = pal or (globals()["BILL"], globals()["BILL_D"], globals()["BILL_DD"])
     h = int(w * 0.425)
     im = Image.new("RGBA", (w + 30, h + 30), (0, 0, 0, 0))
     sh = Image.new("RGBA", im.size, (0, 0, 0, 0)); ImageDraw.Draw(sh).rounded_rectangle([12, 18, w + 12, h + 18], 14, fill=(0, 0, 0, 90))
@@ -43,12 +46,12 @@ def bill(w=620):
     m = w // 22
     d.rounded_rectangle([m, m, w - m, h - m], 10, outline=BILL_D, width=max(2, w // 220))
     cx, cy, r = w // 2, h // 2, int(h * 0.33)
-    d.ellipse([cx - r * 0.8, cy - r, cx + r * 0.8, cy + r], fill=(176, 208, 168), outline=BILL_D, width=max(2, w // 200))
+    d.ellipse([cx - r * 0.8, cy - r, cx + r * 0.8, cy + r], fill=tuple(int(c * 0.9) for c in BILL), outline=BILL_D, width=max(2, w // 200))
     d.text((cx, cy), "$", font=F(ANTON, int(r * 1.3)), fill=BILL_D, anchor="mm")
-    f = F(ANTON, int(h * 0.26))
+    f = F(ANTON, int(h * 0.26 * min(1, 3.4 / len(num))))
     for (x, y, a) in [(m * 2.2, m * 1.6, "la"), (w - m * 2.2, m * 1.6, "ra"), (m * 2.2, h - m * 1.6, "ld"), (w - m * 2.2, h - m * 1.6, "rd")]:
-        d.text((x, y), "100", font=f, fill=BILL_DD, anchor=a)
-    d.text((cx, m * 1.9), "DÓLARES", font=F(MONT(900), int(h * 0.075)), fill=BILL_DD, anchor="ma")
+        d.text((x, y), num, font=f, fill=BILL_DD, anchor=a)
+    d.text((cx, m * 1.9), word, font=F(MONT(900), int(h * 0.075)), fill=BILL_DD, anchor="ma")
     return im
 
 @lru_cache(maxsize=8)
@@ -67,14 +70,16 @@ def paste(fr, spr, cx, cy, scale=1.0, alpha=1.0, angle=0):
         spr = spr.copy(); spr.putalpha(spr.getchannel("A").point(lambda v: int(v * alpha)))
     fr.alpha_composite(spr, (int(cx - spr.width / 2), int(cy - spr.height / 2)))
 
-def brick(d, x, y, w, h, top=True):
-    """Fajo de billetes en perspectiva (bloque verde con faja)."""
+def brick(d, x, y, w, h, top=True, pal=None):
+    """Fajo de billetes en perspectiva (bloque verde con faja). pal = paleta del billete."""
+    BILL, BILL_D, _ = pal or (globals()["BILL"], globals()["BILL_D"], None)
+    hi = tuple(min(255, c + 22) for c in BILL); lo = tuple(int(c * 0.8) for c in BILL)
     d.rectangle([x, y, x + w, y + h], fill=BILL, outline=BILL_D, width=2)
     d.rectangle([x + w * 0.42, y, x + w * 0.58, y + h], fill=(240, 220, 150), outline=BILL_D, width=1)
     if top:
         k = h * 0.35
-        d.polygon([(x, y), (x + k, y - k), (x + w + k, y - k), (x + w, y)], fill=(222, 240, 214), outline=BILL_D)
-        d.polygon([(x + w, y), (x + w + k, y - k), (x + w + k, y + h - k), (x + w, y + h)], fill=(150, 190, 145), outline=BILL_D)
+        d.polygon([(x, y), (x + k, y - k), (x + w + k, y - k), (x + w, y)], fill=hi, outline=BILL_D)
+        d.polygon([(x + w, y), (x + w + k, y - k), (x + w + k, y + h - k), (x + w, y + h)], fill=lo, outline=BILL_D)
 
 def person(d, cx, base_y, h, color=INK):
     """Silueta humana simple para dar escala."""
