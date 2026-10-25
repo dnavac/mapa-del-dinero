@@ -11,7 +11,7 @@ W, H, FPS = 1080, 1920, 30
 ANTON = "fonts/fontsource-anton/files/anton-latin-400-normal.woff"
 MONT = lambda w: f"fonts/fontsource-montserrat/files/montserrat-latin-{w}-normal.woff"
 YEL = (255, 224, 27); RED = (229, 57, 53); WHITE = (255, 255, 255); BLACK = (0, 0, 0)
-GREEN = (46, 204, 113); BLUE = (66, 133, 244)
+GREEN = (46, 204, 113); BLUE = (66, 133, 244); DARKC = (30, 36, 48)
 
 A = json.load(open("audio/aligned.json"))
 
@@ -51,6 +51,10 @@ def photo(path, z0=1.0, z1=1.12, p0=(0.5, 0.5), p1=(0.5, 0.5), blur=0, dim=0.0, 
 
 def mapbg(cam0, cam1, colors=None, timed_colors=None):
     return dict(type="map", cam0=cam0, cam1=cam1, colors=colors or {}, timed=timed_colors or [])
+
+def custom(fn):
+    """Fondo dibujado por código: fn(T, p, dt) -> imagen RGB 1080x1920 (p = avance 0..1 de la escena, dt = s desde el corte)."""
+    return dict(type="custom", fn=fn)
 
 exec(open(os.environ.get("SCENES", "scenes.py"), encoding="utf-8").read())
 
@@ -193,6 +197,20 @@ def draw_overlay(fr, o, T):
         spr = text_sprite(o["text"], 64, o["color"], o.get("bg", (0, 0, 0)), fontp=MONT(900), pad=(30, 10))
         x = W / 2 + (1 - ease_out(dt / 0.3)) * -700
         paste_center(fr, spr, x, o["y"])
+    elif k == "fn":
+        o["fn"](fr, T, dt)
+    elif k == "bubble":
+        xy = geo_xy(T, o["geo"])
+        if xy is None: return
+        r = o.get("r", 60) * back(dt / 0.35)
+        col = o.get("color", RED)
+        lay = Image.new("RGBA", fr.size, (0, 0, 0, 0)); ld = ImageDraw.Draw(lay)
+        ld.ellipse([xy[0] - r, xy[1] - r, xy[0] + r, xy[1] + r], fill=col + (200,), outline=WHITE + (255,), width=6)
+        fr.alpha_composite(lay)
+        if o.get("text") and dt > 0.15:
+            spr = text_sprite(o["text"], o.get("size", 54), WHITE, DARKC, fontp=MONT(900), pad=(22, 8))
+            off = o.get("off", (0, -r - 50))
+            paste_center(fr, spr, xy[0] + off[0], xy[1] + off[1], scale=back((dt - 0.15) / 0.25))
     elif k == "chip":
         spr = text_sprite(o["text"], 52, BLACK, YEL, fontp=MONT(900), pad=(24, 8))
         s = back(dt / 0.25) if dt < 0.25 else 1
@@ -385,6 +403,8 @@ def render_frame(n):
             shake = (a * math.sin(T * 90), a * math.cos(T * 70))
     if bg["type"] == "photo":
         fr = render_photo(bg, p, punch)
+    elif bg["type"] == "custom":
+        fr = bg["fn"](T, p, dtc)
     else:
         fr = render_map(bg, p, T, punch)
     if shake != (0, 0):
